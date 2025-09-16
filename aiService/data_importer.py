@@ -5,7 +5,7 @@ from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 from typing import List, Dict, Optional, Union
-from class_mod.rest_qdrant import RestQdrantClient
+from qdrant_client import QdrantClient
 import uuid
 from dotenv import load_dotenv
 
@@ -23,8 +23,7 @@ class DataImporter:
     def _init_qdrant(self):
         """Initialize Qdrant client with error handling"""
         try:
-            self.client = RestQdrantClient(url=self.qdrant_url,timeout=15)
-            # Test connection
+            self.client = QdrantClient(url=self.qdrant_url, timeout=15)
             self.qdrant_available = True
             print(f"Successfully connected to Qdrant at {self.qdrant_url}")
         except Exception as e:
@@ -34,8 +33,8 @@ class DataImporter:
             self.qdrant_available = False
     def _create_collection(self):
         try:
-            collections = self.client.get_collection(self.collection_name)
-            if collections:
+            collections = self.client.get_collections()
+            if any(c['name'] == self.collection_name for c in collections['result']['collections']):
                 print(f"Collection '{self.collection_name}' already exists.")
                 return
 
@@ -60,10 +59,10 @@ class DataImporter:
         payload = {
             "source": data.source,
             "name": data.name,
-            "start_place": data.start_place.dict() if data.start_place else None,
-            "destination_place": data.destination_place.dict() if data.destination_place else None,
+            "start_place": data.start_place,
+            "destination_place": data.destination_place,
             "country": data.country,
-            "visited_place": [p.dict() for p in data.visited_place] if data.visited_place else [],
+            "visited_place": data.visited_place,
             "duration": data.duration,
             "budget": data.budget,
             "transportation": data.transportation,
@@ -72,18 +71,17 @@ class DataImporter:
             "theme": data.theme,
             "plan_details": data.plan_details
         }
-        # collections = self.client.get_collection(collection)
-        # if not collections:
-        print(f"Collection '{collection}' does not exist. Creating it now.")
-        self.client.recreate_collection(
-            collection_name=collection,
-            vector_size=1024,
-            distance="Cosine"
-        )
-        print({"collection": collection, "point_id": point_id, "embedding_length": len(embedding), "payload_keys": list(payload.keys())})
+        collections = self.client.get_collection(collection)
+        if not collections:
+            print(f"Collection '{collection}' does not exist. Creating it now.")
+            self.client.recreate_collection(
+                collection_name=collection,
+                vectors_config=VectorParams(size=1024, distance=Distance.COSINE)
+            )
+        
         self.client.upsert(
             collection_name=collection,
-            points=[{"id": point_id, "vector": embedding, "payload": payload}]
+            points=[PointStruct(id=point_id, vector=embedding, payload=payload)]
         )
         print(f"Inserted text with ID: {point_id}")
         return point_id
