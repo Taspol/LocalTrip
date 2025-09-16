@@ -7,7 +7,6 @@ from qdrant_client.models import Distance, VectorParams, PointStruct
 from typing import List, Dict, Optional, Union
 from qdrant_client import QdrantClient
 import uuid
-import time
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -55,7 +54,7 @@ class DataImporter:
         return embeddings.tolist()
     
     def insert_directly(self, collection: str, data: DataInput) -> str:
-        point_id = f"{int(time.time())}_{uuid.uuid4()}"
+        point_id = str(uuid.uuid4())
         embedding = self.encode_text(data.plan_details)[0]
         payload = {
             "source": data.source,
@@ -72,13 +71,13 @@ class DataImporter:
             "theme": data.theme,
             "plan_details": data.plan_details
         }
-        # collections = self.client.get_collection(collection)
-        # if not collections:
-        print(f"Collection '{collection}' does not exist. Creating it now.")
-        self.client.recreate_collection(
-            collection_name=collection,
-            vectors_config=VectorParams(size=1024, distance=Distance.COSINE)
-        )
+        collections = self.client.get_collection(collection)
+        if not collections:
+            print(f"Collection '{collection}' does not exist. Creating it now.")
+            self.client.recreate_collection(
+                collection_name=collection,
+                vectors_config=VectorParams(size=1024, distance=Distance.COSINE)
+            )
         
         self.client.upsert(
             collection_name=collection,
