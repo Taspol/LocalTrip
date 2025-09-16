@@ -77,7 +77,8 @@ class DataImporter:
             "plan_details": data.plan_details
         }
         collections = self.client.get_collection(collection)
-        if not collections:
+        print(collections)
+        if collections:
             print(f"Collection '{collection}' does not exist. Creating it now.")
             self.client.recreate_collection(
                 collection_name=collection,
