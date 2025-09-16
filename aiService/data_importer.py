@@ -83,7 +83,7 @@ class DataImporter:
         
         self.client.upsert(
             collection_name=collection,
-            points=[PointStruct(id=point_id, vector=embedding, payload=payload)]
+            points=[{"id": point_id, "vector": embedding, "payload": payload}]
         )
         print(f"Inserted text with ID: {point_id}")
         return point_id
