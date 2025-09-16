@@ -1,5 +1,8 @@
 import os
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class RestQdrantClient:
     def __init__(self, url, api_key=None, verify=True, timeout=5):

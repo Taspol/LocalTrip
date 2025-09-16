@@ -7,7 +7,9 @@ from qdrant_client.models import Distance, VectorParams, PointStruct
 from typing import List, Dict, Optional, Union
 from class_mod.rest_qdrant import RestQdrantClient
 import uuid
+from dotenv import load_dotenv
 
+load_dotenv()
 class DataImporter:
     def __init__(self, qdrant_url: str = os.getenv("QDRANT_HOST"), collection_name: str = "demo_bge_m3"):
         self.model = SentenceTransformer("BAAI/bge-m3")
