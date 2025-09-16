@@ -1,0 +1,85 @@
+# GENERAL PROJECT CONTEXT
+---
+description: Hiking webapp project - fullstack application for outdoor trail navigation.
+globs: []
+alwaysApply: true
+---
+This project is a hiking web application that helps users navigate, plan, and share hiking routes.  
+Key features include offline GPS maps, turn-by-turn voice navigation, live tracking, route creation, and AR view for peaks.  
+Target users are hikers in remote areas with limited internet access.
+
+Follow best practices for performance, privacy, and battery efficiency.
+
+# TECH STACK RULES
+---
+description: Tech stack and architectural guidance
+globs: []
+alwaysApply: true
+---
+Frontend:
+- Framework: Next.js (React)
+- Styling: Tailwind CSS
+- State Management: Zustand
+- Maps: Mapbox GL JS or Leaflet
+- AR: WebAR (experimental)
+
+Backend:
+- Language: Go (Golang)
+- Framework: Fiber or Gin
+- Database: PostgreSQL with PostGIS
+- Auth: Supabase Auth or Firebase Auth
+- Realtime: WebSocket for live tracking
+- Offline support: Service Workers + localStorage or IndexedDB
+
+API:
+- RESTful + optional GraphQL (if client needs nested data)
+- Version routes with /api/v1/
+- All APIs must validate inputs with zod or similar schema
+
+# CODING CONVENTIONS
+---
+description: Enforce naming, formatting, and file structure
+globs: ["src/**/*"]
+alwaysApply: true
+---
+- Use functional React components only
+- All components must use TypeScript
+- Prefer `snake_case` for backend and `camelCase` for frontend
+- Place all API routes in `/pages/api/` (Next.js)
+- Organize components under `/src/components/`
+- Use hooks for all logic — no class components
+- Format code with Prettier + ESLint (airbnb-base or custom config)
+
+# ROUTING & UI RULES
+---
+description: UX behavior and component patterns
+globs: ["src/pages/**/*.tsx", "src/components/**/*.tsx"]
+alwaysApply: true
+---
+- Use dynamic routing for trail pages (e.g., /trail/[trailId])
+- Use shallow routing to preserve scroll position
+- Reuse layout components: MapLayout, TrailInfoPanel, ARCameraView
+- Use voice feedback for navigation if browser supports Web Speech API
+
+# MAP INTERACTIONS
+---
+description: Mapping logic and UI patterns
+globs: ["src/components/map/**"]
+alwaysApply: true
+---
+- Use map libraries with offline capability (Mapbox or Leaflet with tile caching)
+- Show real-time location with geolocation API
+- Allow users to draw and edit routes
+- Use elevation APIs to calculate difficulty
+- Add AR labels on peaks using GPS + camera
+
+# MONETIZATION RULES
+---
+description: Define access levels and paywall behavior
+globs: []
+alwaysApply: true
+---
+- Free tier: Access to basic maps, trail search, community reviews
+- Pro tier: Offline maps, voice nav, live tracking, AR features
+- Use feature flags to separate paid features
+- Add in-app prompts (modals or banners) when user tries to access Pro features
