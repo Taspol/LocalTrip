@@ -1,3 +1,4 @@
+import os
 import requests
 
 class RestQdrantClient:
@@ -65,7 +66,7 @@ class RestQdrantClient:
 
 # Example usage:
 client = RestQdrantClient(
-    url="https://qdrant.taspolsd.dev",
+    url= os.getenv("QDRANT_HOST"),
     api_key="YOUR_API_KEY",   # or None
     verify=False              # only if needed
 )
