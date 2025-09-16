@@ -27,10 +27,8 @@ class DataImporter:
         try:
             self.client = RestQdrantClient(url=self.qdrant_url,timeout=15)
             # Test connection
-            self.client.get_collections()
             self.qdrant_available = True
             print(f"Successfully connected to Qdrant at {self.qdrant_url}")
-            self._create_collection()
         except Exception as e:
             print(f"Warning: Could not connect to Qdrant: {e}")
             print("Running in offline mode - vector operations will be disabled")
