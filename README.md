@@ -1,4 +1,5 @@
 # WildGuide
+by Localtrip
 
 ## Plan Safer & Smarter Adventures
 
