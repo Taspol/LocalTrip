@@ -3,6 +3,9 @@ import requests
 
 class RestQdrantClient:
     def __init__(self, url, api_key=None, verify=True, timeout=5):
+        print(f"this is url: {url}")
+        if url is None:
+            raise ValueError("Qdrant URL must not be None. Please set the QDRANT_HOST environment variable or provide a URL.")
         self.url = url.rstrip("/")
         self.session = requests.Session()
         self.session.verify = verify
