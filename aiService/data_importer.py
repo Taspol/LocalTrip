@@ -64,10 +64,10 @@ class DataImporter:
         payload = {
             "source": data.source,
             "name": data.name,
-            "start_place": data.start_place,
-            "destination_place": data.destination_place,
+            "start_place": data.start_place.dict() if data.start_place else None,
+            "destination_place": data.destination_place.dict() if data.destination_place else None,
             "country": data.country,
-            "visited_place": data.visited_place,
+            "visited_place": [p.dict() for p in data.visited_place] if data.visited_place else [],
             "duration": data.duration,
             "budget": data.budget,
             "transportation": data.transportation,
