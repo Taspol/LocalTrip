@@ -58,28 +58,15 @@ WildGuide is your all-in-one digital companion for wilderness adventures in Thai
 ---
 
 ## 🏆 Key Features
-- AI-powered trip planning
-- Seamless booking for guides, transport, and accommodation
-- Safety registration and real-time tracking
-- Emergency SOS and 24/7 support
-- Community reviews and rewards
 
----
 
 ## 🌄 Ready to plan your next adventure?
 Plan smart. Adventure safely. Explore more.
 
-[Start Your Adventure](https://wildguide.vercel.app/plan)
-
-100% Free to start • No credit card required • Safety Certified
 
 ---
 
-## 📎 Additional Links
-- [Home](https://wildguide.vercel.app/)
-- [Plan Trip](https://wildguide.vercel.app/plan)
 - [Navigate Trails](https://wildguide.vercel.app/navigate)
-- [AI Assistant](https://wildguide.vercel.app/chat)
 - [Your Profile](https://wildguide.vercel.app/profile)
 - [Safety Guidelines](https://wildguide.vercel.app/#)
 - [Emergency Contacts](https://wildguide.vercel.app/#)
@@ -87,5 +74,4 @@ Plan smart. Adventure safely. Explore more.
 - [Contact Us](https://wildguide.vercel.app/#)
 
 ---
-
 © 2025 WildGuide. Made for outdoor enthusiasts.
