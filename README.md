@@ -59,19 +59,72 @@ WildGuide is your all-in-one digital companion for wilderness adventures in Thai
 
 ## 🏆 Key Features
 
+---
+
+## 📁 Project File Structure
+
+```
+Localtrip/
+│
+├── frontend/         # Next.js web application (UI, pages, components, static assets)
+│   ├── src/          # Main source code (app, components, hooks, lib, pages, styles)
+│   ├── public/       # Static files (SVGs, images, etc.)
+│   ├── .next/        # Next.js build output
+│   ├── package.json  # Frontend dependencies and scripts
+│   └── ...           # Config and setup files
+│
+├── backend/          # Node.js/TypeScript backend API
+│   ├── src/          # API source code (server, routes, models, config, utils)
+│   ├── api/          # API versioning (e.g., v1/health.ts)
+│   ├── swagger-docs/ # OpenAPI/Swagger documentation
+│   ├── package.json  # Backend dependencies and scripts
+│   └── ...           # Config and setup files
+│
+├── aiService/        # Python-based AI and utility services
+│   ├── app.py        # Main entry for AI service
+│   ├── data_importer.py # Data import logic
+│   ├── interface.py  # API interface for AI service
+│   ├── class_mod/    # Custom classes/modules (e.g., Qdrant integration)
+│   ├── utils/        # Utility scripts (LLM caller, YouTube extractor)
+│   ├── requirements.txt # Python dependencies
+│   └── ...           # Config and setup files
+│
+├── README.md         # Project overview and documentation
+└── ...               # Other project-level files
+```
+
+### Folder & File Explanations
+
+- **frontend/**: Contains all code for the web user interface, built with Next.js and styled with Tailwind CSS. Includes UI components, pages, hooks, and static assets.
+	- `src/`: Main source code for the frontend app.
+	- `public/`: Static files served directly.
+	- `.next/`: Build output (auto-generated).
+	- `package.json`: Frontend dependencies and scripts.
+
+- **backend/**: Node.js/TypeScript backend API. Handles authentication, trip/user management, and database connections.
+	- `src/`: Main backend source code (server, routes, models, config, utils).
+	- `api/`: API versioning and endpoints.
+	- `swagger-docs/`: OpenAPI/Swagger documentation for the API.
+	- `package.json`: Backend dependencies and scripts.
+
+- **aiService/**: Python-based AI and utility services for trip planning, data import, and LLM utilities.
+	- `app.py`: Main entry point for AI service.
+	- `data_importer.py`: Data import logic.
+	- `interface.py`: API interface for AI service.
+	- `class_mod/`: Custom classes/modules (e.g., Qdrant integration).
+	- `utils/`: Utility scripts (LLM caller, YouTube extractor).
+	- `requirements.txt`: Python dependencies.
+
+- **README.md**: This file. Project overview and documentation.
+
+---
 
 ## 🌄 Ready to plan your next adventure?
 Plan smart. Adventure safely. Explore more.
 
-
 ---
 
-- [Navigate Trails](https://wildguide.vercel.app/navigate)
-- [Your Profile](https://wildguide.vercel.app/profile)
-- [Safety Guidelines](https://wildguide.vercel.app/#)
-- [Emergency Contacts](https://wildguide.vercel.app/#)
-- [Help Center](https://wildguide.vercel.app/#)
-- [Contact Us](https://wildguide.vercel.app/#)
+- [Click here to try the Prototype](https://wildguide.vercel.app/navigate)
 
 ---
 © 2025 WildGuide. Made for outdoor enthusiasts.
