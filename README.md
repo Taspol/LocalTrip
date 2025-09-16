@@ -122,9 +122,6 @@ Localtrip/
 ## 🌄 Ready to plan your next adventure?
 Plan smart. Adventure safely. Explore more.
 
----
-
 - [Click here to try the Prototype](https://wildguide.vercel.app/navigate)
 
----
 © 2025 WildGuide. Made for outdoor enthusiasts.

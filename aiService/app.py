@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from interface import PlanRequest, PlanResponse, TripPlan , YoutubeLinkRequest, YoutubeLinkResponse, ChatRequest
+from interface import DatabaseInput, DatabaseRequest, PlanRequest, PlanResponse, TripPlan , YoutubeLinkRequest, YoutubeLinkResponse, ChatRequest
 from data_importer import DataImporter
 from utils.llm_caller import LLMCaller
 import asyncio
@@ -108,10 +108,22 @@ def add_youtube_link(request: YoutubeLinkRequest):
             }
         )
 
-@app.post("/v1/searchSimilar", response_model=list[dict])
-def search_similar(request: YoutubeLinkRequest):
+@app.post("/v1/addDirectlyToCollection", response_model=str)
+def add_text_to_collection(data: DatabaseInput) -> str:
     try:
-        results = data_importer.search_similar(query=request.video_id)
+        point_id = data_importer.insert_directly(collection=data.collection_name, data=data.data)
+        return point_id
+    except Exception as e:
+        print(f"Error inserting text: {e}")
+        return str(e)
+    
+@app.post("/v1/searchSimilar", response_model=list[dict])
+def search_similar(request: DatabaseRequest):
+    try:
+        results = data_importer.search_similar(
+            collection=request.collection_name,
+            query=request.query_text
+        )
         return results
     except Exception as e:
         logger.error(f"Error during search: {e}")

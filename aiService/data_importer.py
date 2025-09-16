@@ -1,3 +1,4 @@
+from interface import DataInput
 from utils.youtube_extractor import YoutubeExtractor
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
@@ -53,6 +54,40 @@ class DataImporter:
         
         embeddings = self.model.encode(texts, normalize_embeddings=True)
         return embeddings.tolist()
+    
+    def insert_directly(self, collection: str, data: DataInput) -> str:
+        point_id = str(uuid.uuid4())
+        embedding = self.encode_text(data.plan_details)[0]
+        payload = {
+            "source": data.source,
+            "name": data.name,
+            "start_place": data.start_place,
+            "destination_place": data.destination_place,
+            "country": data.country,
+            "visited_place": data.visited_place,
+            "duration": data.duration,
+            "budget": data.budget,
+            "transportation": data.transportation,
+            "accommodation": data.accommodation,
+            "safety": data.safety,
+            "theme": data.theme,
+            "plan_details": data.plan_details
+        }
+        collections = self.client.get_collection(collection)
+        if not collections:
+            print(f"Collection '{collection}' does not exist. Creating it now.")
+            self.client.recreate_collection(
+                collection_name=collection,
+                vectors_config=VectorParams(size=1024, distance=Distance.COSINE)
+            )
+        
+        self.client.upsert(
+            collection_name=collection,
+            points=[PointStruct(id=point_id, vector=embedding, payload=payload)]
+        )
+        print(f"Inserted text with ID: {point_id}")
+        return point_id
+
     
     def insert_text(self, text: str, metadata: Optional[Dict] = None, custom_id: Optional[str] = None) -> str:
         point_id = custom_id or str(uuid.uuid4())

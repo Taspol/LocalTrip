@@ -17,6 +17,34 @@ class YoutubeLinkRequest(BaseModel):
 class YoutubeLinkResponse(BaseModel):
     message: str
     video_url: str
+    
+class Place(BaseModel):
+    name: str
+    latitude: float
+    longitude: float
+    
+class DataInput(BaseModel):
+    source: str
+    name: str
+    start_place: Place
+    destination_place: Place
+    visited_place: List[Place]
+    duration: Optional[int] = None
+    budget: Optional[float] = None
+    transportation: Optional[str] = None
+    accommodation: Optional[str] = None
+    safety: Optional[str] = None
+    theme: Optional[str] = None
+    country: str
+    plan_details: str
+
+class DatabaseInput(BaseModel):
+    collection_name: str
+    data: DataInput
+    
+class DatabaseRequest(BaseModel):
+    collection_name: Optional[str] = None
+    query_text: str
 
 
 class PlanRequest(BaseModel):
