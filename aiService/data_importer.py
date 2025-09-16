@@ -1,3 +1,4 @@
+import os
 from interface import DataInput
 from utils.youtube_extractor import YoutubeExtractor
 from sentence_transformers import SentenceTransformer
@@ -8,7 +9,7 @@ from class_mod.rest_qdrant import RestQdrantClient
 import uuid
 
 class DataImporter:
-    def __init__(self, qdrant_url: str = "https://qdrant.taspolsd.dev", collection_name: str = "demo_bge_m3"):
+    def __init__(self, qdrant_url: str = os.getenv("QDRANT_HOST"), collection_name: str = "demo_bge_m3"):
         self.model = SentenceTransformer("BAAI/bge-m3")
         # self.client = QdrantClient(url=qdrant_url)
         self.qdrant_url = qdrant_url
@@ -80,7 +81,7 @@ class DataImporter:
                 collection_name=collection,
                 vectors_config=VectorParams(size=1024, distance=Distance.COSINE)
             )
-        
+        print({"collection": collection, "point_id": point_id, "embedding_length": len(embedding), "payload_keys": list(payload.keys())})
         self.client.upsert(
             collection_name=collection,
             points=[{"id": point_id, "vector": embedding, "payload": payload}]
@@ -99,7 +100,7 @@ class DataImporter:
         
         self.client.upsert(
             collection_name=self.collection_name,
-            points=[PointStruct(id=point_id, vector=embedding, payload=payload)]
+            points=[{"id": point_id, "vector": embedding, "payload": payload}]
         )
         
         print(f"Inserted text with ID: {point_id}")
@@ -115,8 +116,8 @@ class DataImporter:
             if metadata_list and i < len(metadata_list):
                 payload.update(metadata_list[i])
             
-            points.append(PointStruct(id=point_id, vector=embedding, payload=payload))
-        
+            points.append({"id": point_id, "vector": embedding, "payload": payload})
+
         self.client.upsert(collection_name=self.collection_name, points=points)
         print(f"Inserted {len(texts)} texts")
         return point_ids
