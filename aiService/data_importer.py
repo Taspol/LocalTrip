@@ -72,14 +72,14 @@ class DataImporter:
             "theme": data.theme,
             "plan_details": data.plan_details
         }
-        collections = self.client.get_collection(collection)
-        if not collections:
-            print(f"Collection '{collection}' does not exist. Creating it now.")
-            self.client.recreate_collection(
-                collection_name=collection,
-                vector_size=1024,
-                distance="Cosine"
-            )
+        # collections = self.client.get_collection(collection)
+        # if not collections:
+        print(f"Collection '{collection}' does not exist. Creating it now.")
+        self.client.recreate_collection(
+            collection_name=collection,
+            vector_size=1024,
+            distance="Cosine"
+        )
         print({"collection": collection, "point_id": point_id, "embedding_length": len(embedding), "payload_keys": list(payload.keys())})
         self.client.upsert(
             collection_name=collection,
