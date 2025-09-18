@@ -13,7 +13,7 @@ uv sync
 ### 2. Configure environment variables
 Create a `.env` file (see `.env.example` for reference) and set, for example:
 ```env
-QDRANT_HOST=http://qdrant.taspolsd.dev
+QDRANT_HOST=http://qdrant.taspolsd.dev # this is our test server (not the server that poc uses)
 SEALION_API=your-sealion-api-key
 SEALION_BASE_URL=https://api.sea-lion.ai/v1
 ```
