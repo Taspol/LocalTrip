@@ -35,8 +35,6 @@ All endpoints are served from your running FastAPI server (default: http://local
 
 ### Root & Health
 - `GET /` — Root endpoint, returns service status
-- `GET /health` — Health check endpoint
-- `GET /v1` — Service info and health
 
 ### Trip Planning
 - `POST /v1/generateTripPlan` — Generate a trip plan
@@ -50,19 +48,24 @@ All endpoints are served from your running FastAPI server (default: http://local
   - Response: `str` (point ID)
   - Example: [http://localhost:9000/v1/addDirectlyToCollection](http://localhost:9000/v1/addDirectlyToCollection)
 
-### Search
-- `POST /v1/searchSimilar` — Search for similar content in a collection
-  - Request body: `DatabaseRequest`
-  - Response: `list[dict]`
-  - Example: [http://localhost:9000/v1/searchSimilar](http://localhost:9000/v1/searchSimilar)
-
 ### Chat
 - `POST /v1/basicChat` — Basic chat with the LLM agent
   - Request body: `ChatRequest`
   - Response: `str`
   - Example: [http://localhost:9000/v1/basicChat](http://localhost:9000/v1/basicChat)
 
----
+## 🧪 API Testing with Postman
+
+You can test the API endpoints using the provided Postman collection file: `API_test.postman_collection.json` (located in this folder).
+
+**How to use:**
+1. Open [Postman](https://www.postman.com/downloads/).
+2. Click `Import` in the top left.
+3. Select the file `API_test.postman_collection.json` from this directory.
+4. You will see pre-configured requests for health check, trip plan generation, and chat.
+5. Make sure your local server is running at `http://localhost:9000` before sending requests.
+
+This makes it easy to try out and debug the API endpoints interactively.
 
 
 

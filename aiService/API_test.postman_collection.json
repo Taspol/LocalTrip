@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "52a72a0e-b6f7-44fc-a221-2e5b74e48780",
+		"name": "AI Service API test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29531582"
+	},
+	"item": [
+		{
+			"name": "healthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generateTripPlan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"start_place\": \"Chiangmai\",\n  \"destination\": \"Doi luang chiang dao\",\n  \"travelDates\": \"2025-12-24 to 2025-12-28\",\n  \"duration\": 5,\n  \"groupSize\": 4,\n  \"interests\": [\n    \"Cultural sites\",\n    \"Local cuisine\",\n    \"Art and architecture\"\n  ],\n  \"budgetTier\": \"Mid-range\",\n  \"trip_price\": 10000.00,\n  \"stayPref\": \"Boutique hotels\",\n  \"transportPref\": \"Rental car\",\n  \"theme\": \"Cultural Exploration\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/generateTripPlan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"generateTripPlan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "basicQuery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\":\"Hello Sealion\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/basicChat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"basicChat"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
