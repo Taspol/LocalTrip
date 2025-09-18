@@ -1,32 +1,16 @@
----
-title: PAN SEA
-emoji: 🐠
-colorFrom: indigo
-colorTo: green
-sdk: docker
-pinned: false
-short_description: For PAN-SEA ai service documentation 
----
-
-## 🛠️ Project Setup & Run (with uv)
+## 🛠️ Project Setup & Run
 
 ### Prerequisites
 Install python package manaer
 - [uv package manager documentation](https://docs.astral.sh/uv/)
 
-### 1. Create and activate a virtual environment (recommended)
-```sh
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-### 2. Install dependencies
+### 1. Install dependencies
 Sync all dependencies from `pyproject.toml` (if available):
 ```sh
-uv pip sync
+uv sync
 ```
 
-### 3. Configure environment variables
+### 2. Configure environment variables
 Create a `.env` file (see `.env.example` for reference) and set, for example:
 ```env
 QDRANT_HOST=http://qdrant.taspolsd.dev
@@ -35,7 +19,7 @@ SEALION_BASE_URL=https://api.sea-lion.ai/v1
 ```
 Adjust values as needed for your environment.
 
-### 4. Run the AI Service
+### 3. Run the AI Service
 Start the main service:
 ```sh
 uv run uvicorn app:app --reload --host 0.0.0.0 --port 9000
